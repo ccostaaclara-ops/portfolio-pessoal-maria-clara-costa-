@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio Pessoal | Maria Clara</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #e65100;      /* Laranja Vivo */
+            --accent-color: #ffb300;       /* Amarelo Ouro */
+            --tiger-black: #121212;        /* Preto */
+            --tiger-dark: #1e1e1e;         /* Grafite Escuro */
+            --light-gray: #fdf6ec;         /* Fundo amarelado suave */
+            --text-dark: #2c1d11;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* HEADER AJUSTADO COM FLEXBOX PARA A FOTO DE PERFIL */
+        header {
+            background: linear-gradient(135deg, var(--tiger-black) 0%, #2a0800 100%);
+            color: white;
+            padding: 35px 20px;
+            border-bottom: 6px solid var(--primary-color);
+        }
+
+        .header-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            text-align: left;
+        }
+
+        .foto-perfil {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-color);
+            box-shadow: 0 4px 10px rgba(230, 81, 0, 0.4);
+            flex-shrink: 0;
+        }
+
+        .header-texto h1 {
+            font-size: 2.2rem;
+            color: var(--accent-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        #saudacao {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        nav {
+            background-color: var(--tiger-dark);
+            padding: 12px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 25px 20px;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        /* RESPONSIVIDADE DO HEADER PARA CELULAR */
+        @media (max-width: 768px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .foto-perfil {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        section {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(230, 81, 0, 0.08);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            color: var(--tiger-black);
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            margin-left: 20px;
+        }
+
+        .lei-box {
+            background: #fff8e1;
+            border-left: 5px solid var(--accent-color);
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+
+        .btn-filtro {
+            background: linear-gradient(to right, #ff8f00, #e65100);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            cursor: pointer;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .btn-filtro:hover {
+            transform: scale(1.05);
+            background: linear-gradient(to right, #e65100, #bf360c);
+        }
+
+        #texto-dados {
+            margin-top: 12px;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        /* ESTILOS DO JOGO INTERATIVO */
+        .jogo-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .jogo-input {
+            padding: 10px;
+            border: 2px solid var(--primary-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .mensagem-jogo {
+            font-weight: bold;
+            margin-top: 10px;
+            color: var(--tiger-black);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--tiger-black);
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <img src="profile.jpg" alt="Foto de perfil de Maria Clara" class="foto-perfil"> 
+            
+            <div class="header-texto">
+                <p id="saudacao"></p>
+                <h1>Maria Clara da Costa Gonçalves</h1>
+                <p>Desenvolvedora web & Pesquisadora. </p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <a href="#sobre">Sobre Mim</a>
+        <a href="#interatividade">interatividade</a>
+        <a href="#interesses">Meus Interesses</a>
+        <a href="#habilidades">Habilidades</a>
+    </nav>
+
+    <div class="container">
+        <div class="grid-layout">
+            <main>
+                <section id="sobre">
+                    <h2>Sobre Mim</h2>
+                    <p>
+                        Ooi! Sou a <strong>Maria Clara</strong>, estudante do IFRJ e curiosa em desenvolvimento web.
+                    <br>Possuo conhecimento em JavaScript, Python e Linguagem C, além de estar expandindo minhas competências em Java, C# e na estrutura de bancos de dados. 
+                    <br>No campo tecnológico, também realizo pesquisas e práticas em inteligência artificial e prototipagem de jogos.
+                    <br>Paralelamente à tecnologia, busco integrar o código a temas de relevância social e cultural. 
+                        Meus interesses acadêmicos englobam a Línguas estrangeiras, Língua Brasileira de Sinais (Libras), inclusão digital, comunicação, estudos étnico-raciais, valorização da cultura indígena e as conexões da lusofonia na Língua Portuguesa.
+                        Busco constantemente aumentar meu conhecimento técnico para desenvolver soluções que possam ressaltar a importância da diversidade e engajar outras pessoas  e principalmente meninas a utilizarem a tecnologia como ferramenta de construção para um futuro melhor.
+                    </p>
+            
+                </section>
+
+                <section id="interatividade">
+                    <h2>Jogo Interativo</h2>
+                    <div class="lei-box">
+                        <h3> Adivinhe! </h3>
+                        <p>Pensei em um número secreto entre <strong>1 e 10</strong>. Você tem apenas <strong>3 tentativas</strong>!</p>
+                        
+                        <div class="jogo-container">
+                            <div>
+                                <input type="number" id="palpite" class="jogo-input" placeholder="Digite de 1 a 10" min="1" max="10">
+                                <button class="btn-filtro" id="btnChutar">Chutar</button>
+                                <button class="btn-filtro" id="btnReiniciar" style="display: none;">Jogar Novamente</button>
+                            </div>
+                            <p id="mensagemJogo" class="mensagem-jogo"></p>
+                            <p id="tentativasJogo">Tentativas restantes: 3</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <aside>
+                <section id="Conhecimento">
+                    <h2>Minhas habilidades</h2>
+                    <ul>
+                          <strong>Desenvolvimento de Software/Web</strong>
+                          <div>Desenvolvimento Full-Stack (Front-End e Back-End).
+                          <div>Programação Orientada a Objetos.
+                          <div>Lógica de Programação.
+
+                        </div>
+                         <br> 
+                        <strong>Linguagens de Programação</strong> 
+                          <div>JavaScript.
+                          <div>Python.
+                          <div>Linguagem C.
+                          <div>Java (iniciando).
+                          <div> C# (iniciando).
+
+                        </div>
+                         <br>
+                        <strong>Banco de Dados</strong>
+                        <div> Modelagem de Dados Relacional.
+                        <div> Linguagem SQL (iniciando).
+
+                        </div>
+                        <br>
+                        <strong>Ferramentas</strong>
+                        <div>
+                        <div>Inteligência Artificial (IA).
+                        <div>Prototipagem de Jogos (Game Design).
+                        <div>Versionamento de Código (Git / GitHub).
+                        </div>
+                    </ul>
+                        
+                </section>
+
+                <section id="interesses">
+                    <h2>Minhas Aptidões</h2>
+                    <p>Clique abaixo para carregar minhas áreas de interesse de estudo:</p>
+                    <button class="btn-filtro" id="botao-dados">Carregar interesses</button>
+                    <div id="texto-dados"></div>
+                </section>
+            </aside>
+        </div> 
+    </div>
+
+    <footer>
+        <p>Curso Koletividade | IFRJ. Maria Clara da Costa Gonçalves.</p>
+    </footer>
+
+    <script>
+
+        const hora = new Date().getHours();
+        let saudacaoTexto;
+
+        if (hora < 12) {
+            saudacaoTexto = "Bom dia! Bem-vinda(o) ao meu portfólio!";
+        } else if (hora < 18) {
+            saudacaoTexto = "Boa tarde! Bem-vinda(o) ao meu portfólio!";
+        } else {
+            saudacaoTexto = "Boa noite! Obrigada por visitar meu portfólio!";
+        }
+
+        document.getElementById("saudacao").textContent = saudacaoTexto;
+
+        const especialidades = [
+            "Acessibilidade Web, Tecnologia Assistiva e Língua Brasileira de Sinais (Libras)",
+            "Relações Étnico-Raciais, Letramento Racial e Diversidade e Pesquisa Social Aplicada",
+            "Oratória, Comunicação Inclusiva, Análise de Linguagem e Discurso e Processamento de Linguagem Natural (Conceitual)",
+            "Estudos de Lusofonia, Cultura Brasileira e Saberes Indígenas História e Historiografia Afro-Brasileira e Indígena"
+           
+
+
+        ];
+
+        document.getElementById('botao-dados').addEventListener('click', function () {
+            const textoDados = document.getElementById('texto-dados');
+            textoDados.innerHTML = '';
+            let j = 0;
+
+            while (j < especialidades.length) {
+                textoDados.innerHTML += `<p>• ${especialidades[j]}</p>`;
+                j++;
+            }
+        });
+
+        let numeroSecreto = Math.floor(Math.random() * 10) + 1;
+        const maxTentativas = 3;
+        let tentativasUsadas = 0;
+
+        const inputPalpite = document.getElementById('palpite');
+        const btnChutar = document.getElementById('btnChutar');
+        const btnReiniciar = document.getElementById('btnReiniciar');
+        const mensagemJogo = document.getElementById('mensagemJogo');
+        const tentativasJogo = document.getElementById('tentativasJogo');
+
+        btnChutar.addEventListener('click', function () {
+            const palpite = Number(inputPalpite.value);
+
+            if (!palpite || palpite < 1 || palpite > 10) {
+                mensagemJogo.textContent = "Por favor, digite um número de 1 a 10!";
+                mensagemJogo.style.color = "#d32f2f";
+                return;
+            }
+
+            tentativasUsadas++;
+            let restantes = maxTentativas - tentativasUsadas;
+
+            if (palpite === numeroSecreto) {
+                mensagemJogo.textContent = `Sensacional! Você acertou o número ${numeroSecreto} em ${tentativasUsadas} tentativa(s)!`;
+                mensagemJogo.style.color = "#2e7d32";
+                finalizarJogo();
+            } else if (tentativasUsadas >= maxTentativas) {
+                mensagemJogo.textContent = ` Que pena, suas tentativas acabaram! O número secreto era ${numeroSecreto}.`;
+                mensagemJogo.style.color = "#d32f2f";
+                tentativasJogo.textContent = "Tentativas restantes: 0";
+                finalizarJogo();
+            } else {
+                if (palpite < numeroSecreto) {
+                    mensagemJogo.textContent = "📉 O número secreto é MAIOR!";
+                } else {
+                    mensagemJogo.textContent = "📈 O número secreto é MENOR!";
+                }
+                mensagemJogo.style.color = "#e65100";
+                tentativasJogo.textContent = `Tentativas restantes: ${restantes}`;
+            }
+
+            inputPalpite.value = '';
+            inputPalpite.focus();
+        });
+
+        function finalizarJogo() {
+            btnChutar.style.display = 'none';
+            btnReiniciar.style.display = 'inline-block';
+            inputPalpite.disabled = true;
+        }
+
+        btnReiniciar.addEventListener('click', function () {
+            numeroSecreto = Math.floor(Math.random() * 10) + 1;
+            tentativasUsadas = 0;
+            mensagemJogo.textContent = '';
+            tentativasJogo.textContent = `Tentativas restantes: ${maxTentativas}`;
+            btnChutar.style.display = 'inline-block';
+            btnReiniciar.style.display = 'none';
+            inputPalpite.disabled = false;
+            inputPalpite.value = '';
+            inputPalpite.focus();
+        });
+    </script>
+</body>
+</html>
